@@ -101,11 +101,15 @@ public class Calculator {
     {
         
         String str="";
+        String deli="";
         //boolean flag=false;
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try{
         str=reader.readLine();
-        
+        if(str.startsWith("//"))
+        {
+            deli=str.substring(2,str.length());
+        }
               
         int count=0;
         int lines=0;
@@ -126,12 +130,12 @@ public class Calculator {
             
             }
             
-            else if(lines==0 && (str.startsWith("//")))
+            else if(lines==0 && (str.substring(2,str.length())).equals(deli))
             {
             newNumbers=reader.readLine()+"/";
-            if(!(newNumbers.contains(str.charAt(2)+"")||newNumbers.contains("/")))
+            if(!(newNumbers.contains(deli)||newNumbers.contains("/")))
                 throw new IOException();
-            newNumbers=newNumbers.replace(str.charAt(2)+"", ",");
+            newNumbers=newNumbers.replace(deli, ",");
             if(newNumbers.contains(","))
             {
                count++;
@@ -139,12 +143,12 @@ public class Calculator {
             numbers=numbers+newNumbers; 
             lines++;
             }
-            else if(lines!=0 && str.startsWith("//"))
+            else if(lines!=0 && (str.substring(2,str.length())).equals(deli))
             {
              newNumbers=reader.readLine()+"/";
-             if(!(newNumbers.contains(str.charAt(2)+"")||newNumbers.contains("/")))
+             if(!(newNumbers.contains(deli)||newNumbers.contains("/")))
                 throw new IOException();
-            newNumbers=newNumbers.replace(str.charAt(2)+"", ",");
+            newNumbers=newNumbers.replace(deli,",");
             if(newNumbers.contains(","))
             {
                count++;
@@ -152,7 +156,7 @@ public class Calculator {
             numbers=numbers+newNumbers; 
             lines++;
             }
-            else if(lines!=0 && !(str.startsWith("//")))
+            else if(lines!=0 && !((str.substring(2,str.length())).equals(deli)))
             {
              newNumbers=reader.readLine()+"/";
            
