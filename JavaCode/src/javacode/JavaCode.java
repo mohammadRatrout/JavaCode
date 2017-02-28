@@ -27,7 +27,7 @@ public class JavaCode {
         String number="";
         String str;
         System.out.println("Please Enter two operands separated by comma, you could saparate the first operand with new lines for as many numbers you want");
-        
+          
         number=calc.reading();
         sum=calc.Add(number);
         if(sum==3030)

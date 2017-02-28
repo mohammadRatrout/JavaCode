@@ -129,7 +129,7 @@ public class Calculator {
             else if(lines==0 && (str.startsWith("//")))
             {
             newNumbers=reader.readLine()+"/";
-            if(!(newNumbers.contains(str.charAt(2)+"")))
+            if(!(newNumbers.contains(str.charAt(2)+"")||newNumbers.contains("/")))
                 throw new IOException();
             newNumbers=newNumbers.replace(str.charAt(2)+"", ",");
             if(newNumbers.contains(","))
@@ -142,7 +142,7 @@ public class Calculator {
             else if(lines!=0 && str.startsWith("//"))
             {
              newNumbers=reader.readLine()+"/";
-             if(!(newNumbers.contains(str.charAt(2)+"")))
+             if(!(newNumbers.contains(str.charAt(2)+"")||newNumbers.contains("/")))
                 throw new IOException();
             newNumbers=newNumbers.replace(str.charAt(2)+"", ",");
             if(newNumbers.contains(","))
