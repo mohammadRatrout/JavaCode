@@ -23,6 +23,7 @@ public class Calculator {
     String []Lines;
     int num=0;
     int nigNum[]=new int [10];
+    int Max=1000;
     public int Add(String number)
     {
         if(number.isEmpty()||number.equals(""))
@@ -55,6 +56,9 @@ public class Calculator {
                                     //JOptionPane.showMessageDialog(null, nigNum[negative]);
                                     negative++;
                                 }
+                                if(num>1000)
+                                    num=0;
+                                
                                 sum+=num;
                             }
                 }
@@ -66,6 +70,8 @@ public class Calculator {
                                     nigNum[negative]=num;
                                     negative++;
                                 }
+                     if(num>1000)
+                         num=0;
                     sum+=num;
                 }
                 if(nigNum[0]<0) throw new IllegalArgumentException();
@@ -91,11 +97,13 @@ public class Calculator {
         
         
     }
-    public String reading() throws IOException
+    public String reading() 
     {
+        
         String str="";
         //boolean flag=false;
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        try{
         str=reader.readLine();
         
               
@@ -121,7 +129,8 @@ public class Calculator {
             else if(lines==0 && (str.startsWith("//")))
             {
             newNumbers=reader.readLine()+"/";
-           
+            if(!(newNumbers.contains(str.charAt(2)+"")))
+                throw new IOException();
             newNumbers=newNumbers.replace(str.charAt(2)+"", ",");
             if(newNumbers.contains(","))
             {
@@ -133,6 +142,8 @@ public class Calculator {
             else if(lines!=0 && str.startsWith("//"))
             {
              newNumbers=reader.readLine()+"/";
+             if(!(newNumbers.contains(str.charAt(2)+"")))
+                throw new IOException();
             newNumbers=newNumbers.replace(str.charAt(2)+"", ",");
             if(newNumbers.contains(","))
             {
@@ -152,6 +163,11 @@ public class Calculator {
             numbers=numbers+newNumbers; 
             lines++;
             }
+        }
+        }catch(IOException e)
+        {
+            System.err.println("Wrong delimiter");
+            return"0,*";
         }
         numbers=numbers.substring(0,numbers.length()-1);
        return numbers;
