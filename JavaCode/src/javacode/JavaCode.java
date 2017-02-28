@@ -29,6 +29,11 @@ public class JavaCode {
         try {
             String numbers=reader.readLine();
             sum=calc.Add(numbers);
+            if(sum==3030)
+            {
+                System.out.println("You've entered too many numbers");
+            }
+            else
             System.out.println("The sum = "+sum);
         } catch (IOException ex) {
             Logger.getLogger(JavaCode.class.getName()).log(Level.SEVERE, null, ex);

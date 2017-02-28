@@ -15,11 +15,26 @@ public class Calculator {
     {
         if(number.isEmpty())
             return sum;
-        String parts[]=number.split(",");
-        for(int i=0;i<2;i++)
+        if(number.contains(","))
         {
-            sum+=Integer.parseInt(parts[i]);
+            String parts[]=number.split(",");
+            if(parts.length>2)
+            {
+                return 3030;//as it is invalid number
+            }
+            for(int i=0;i<2;i++)
+            {
+                sum+=Integer.parseInt(parts[i]);
+            }
+            return sum;
+
         }
-        return sum;
+        else
+        {
+            sum=Integer.parseInt(number);
+            return sum;
+        }
+        
+        
     }
 }
