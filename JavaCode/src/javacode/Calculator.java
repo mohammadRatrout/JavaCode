@@ -21,12 +21,15 @@ public class Calculator {
     String numbers="";
     String newNumbers="";
     String []Lines;
+    int num=0;
+    int nigNum[]=new int [10];
     public int Add(String number)
     {
         if(number.isEmpty()||number.equals(""))
             return sum;
         if(number.contains(","))
         {
+            int negative=0;
             String parts[]=number.split(",");
            
            
@@ -39,19 +42,43 @@ public class Calculator {
                    {
                        return sum=3030;
                    }
+                try{
                 if(parts[i].contains("/"))
                 {
                     Lines=parts[i].split("/");
                             for(int j=0;j<Lines.length;j++)
                             {
-                                sum+=Integer.parseInt(Lines[j]);
+                                num=Integer.parseInt(Lines[j]);
+                                if(num<0)
+                                { 
+                                    nigNum[negative]=num;
+                                    //JOptionPane.showMessageDialog(null, nigNum[negative]);
+                                    negative++;
+                                }
+                                sum+=num;
                             }
                 }
                 else 
                 {
-                    
-                    sum+=Integer.parseInt(parts[i]);
-                }   
+                    num=Integer.parseInt(parts[i]);
+                     if(num<0)
+                                { 
+                                    nigNum[negative]=num;
+                                    negative++;
+                                }
+                    sum+=num;
+                }
+                if(nigNum[0]<0) throw new IllegalArgumentException();
+                }catch(IllegalArgumentException e)
+                {
+                    for(int k=0;k<nigNum.length;k++)
+                    {
+                        if(nigNum[k]!=0)
+                        System.err.println("You've entered "+nigNum[k]+" and negative numbers are not allowed");
+                        
+                    }
+                    return sum=3030;
+                }
             }
             return sum;
 
@@ -67,15 +94,10 @@ public class Calculator {
     public String reading() throws IOException
     {
         String str="";
-        boolean flag=false;
+        //boolean flag=false;
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         str=reader.readLine();
-        if(str.length()>3)
-        if(str.startsWith("//"))
-        {
-            flag=true;
-              
-        }
+        
               
         int count=0;
         int lines=0;
@@ -93,7 +115,7 @@ public class Calculator {
                  }
             numbers=numbers+newNumbers; 
             lines++;
-            // JOptionPane.showMessageDialog(null, newNumbers);
+            
             }
             
             else if(lines==0 && (str.startsWith("//")))
