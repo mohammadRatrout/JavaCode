@@ -5,6 +5,12 @@
  */
 package javacode;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Mohd
@@ -15,7 +21,18 @@ public class JavaCode {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        // TODO code application logic 
+        Calculator calc=new Calculator();
+        int sum=0;
+        System.out.println("Please Enter two numbers separated by comma");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            String numbers=reader.readLine();
+            sum=calc.Add(numbers);
+            System.out.println("The sum = "+sum);
+        } catch (IOException ex) {
+            Logger.getLogger(JavaCode.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
