@@ -8,6 +8,7 @@ package javacode;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,12 +17,13 @@ import java.io.InputStreamReader;
 public class Calculator {
     int sum=0;
     int x;
+   //CharSequence theSparator=",";
     String numbers="";
     String newNumbers="";
     String []Lines;
     public int Add(String number)
     {
-        if(number.isEmpty()||number==" ")
+        if(number.isEmpty()||number.equals(""))
             return sum;
         if(number.contains(","))
         {
@@ -47,7 +49,7 @@ public class Calculator {
                 }
                 else 
                 {
-                    if(parts[i].isEmpty()) return sum=3030;
+                    
                     sum+=Integer.parseInt(parts[i]);
                 }   
             }
@@ -64,19 +66,73 @@ public class Calculator {
     }
     public String reading() throws IOException
     {
+        String str="";
+        boolean flag=false;
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        str=reader.readLine();
+        if(str.length()>3)
+        if(str.startsWith("//"))
+        {
+            flag=true;
+              
+        }
+              
         int count=0;
+        int lines=0;
         while(count!=1)
         {
-            newNumbers=reader.readLine()+"/";
+            if (lines==0 && !(str.startsWith("//")))
+            {
+                
+                newNumbers+=str+"/";
+               
+           
+                if(newNumbers.contains(","))
+                 {
+                    count++;
+                 }
+            numbers=numbers+newNumbers; 
+            lines++;
+             JOptionPane.showMessageDialog(null, newNumbers);
+            }
             
+            else if(lines==0 && (str.startsWith("//")))
+            {
+            newNumbers=reader.readLine()+"/";
+           
+            newNumbers=newNumbers.replace(str.charAt(2)+"", ",");
             if(newNumbers.contains(","))
             {
                count++;
             }
             numbers=numbers+newNumbers; 
+            lines++;
+            }
+            else if(lines!=0 && str.startsWith("//"))
+            {
+             newNumbers=reader.readLine()+"/";
+            newNumbers=newNumbers.replace(str.charAt(2)+"", ",");
+            if(newNumbers.contains(","))
+            {
+               count++;
+            }
+            numbers=numbers+newNumbers; 
+            lines++;
+            }
+            else if(lines!=0 && !(str.startsWith("//")))
+            {
+             newNumbers=reader.readLine()+"/";
+           
+            if(newNumbers.contains(","))
+            {
+               count++;
+            }
+            numbers=numbers+newNumbers; 
+            lines++;
+            }
         }
         numbers=numbers.substring(0,numbers.length()-1);
-       return numbers; 
+       return numbers;
+        
     }
 }
