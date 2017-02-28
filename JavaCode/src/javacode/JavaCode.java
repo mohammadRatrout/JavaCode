@@ -20,24 +20,22 @@ public class JavaCode {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // TODO code application logic 
         Calculator calc=new Calculator();
         int sum=0;
-        System.out.println("Please Enter two numbers separated by comma");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        try {
-            String numbers=reader.readLine();
-            sum=calc.Add(numbers);
-            if(sum==3030)
-            {
-                System.out.println("You've entered too many numbers");
-            }
-            else
-            System.out.println("The sum = "+sum);
-        } catch (IOException ex) {
-            Logger.getLogger(JavaCode.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String number="";
+       
+        System.out.println("Please Enter two operands separated by comma, you could saparate the first operand with new lines for as many numbers you want");
+        number=calc.reading();
+        sum=calc.Add(number);
+        if(sum==3030)
+             System.out.println("Invalid entry");
+        else System.out.println("The sum = "+sum);
+         
+
+
+
     }
     
 }
