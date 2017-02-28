@@ -53,7 +53,7 @@ public class Calculator {
                                 if(num<0)
                                 { 
                                     nigNum[negative]=num;
-                                    //JOptionPane.showMessageDialog(null, nigNum[negative]);
+                                    //
                                     negative++;
                                 }
                                 if(num>1000)
@@ -83,7 +83,7 @@ public class Calculator {
                         System.err.println("You've entered "+nigNum[k]+" and negative numbers are not allowed");
                         
                     }
-                    return sum=3030;
+                   
                 }
             }
             return sum;
@@ -115,12 +115,11 @@ public class Calculator {
         int lines=0;
         while(count!=1)
         {
-            if (lines==0 && !(str.startsWith("//")))
+            if (lines==0 && !(str.startsWith("//")) )
             {
                 
                 newNumbers+=str+"/";
                
-           
                 if(newNumbers.contains(","))
                  {
                     count++;
@@ -143,7 +142,7 @@ public class Calculator {
             numbers=numbers+newNumbers; 
             lines++;
             }
-            else if(lines!=0 && (str.substring(2,str.length())).equals(deli))
+            else if(lines!=0 && (str.contains(deli)))
             {
              newNumbers=reader.readLine()+"/";
              if(!(newNumbers.contains(deli)||newNumbers.contains("/")))
@@ -156,7 +155,7 @@ public class Calculator {
             numbers=numbers+newNumbers; 
             lines++;
             }
-            else if(lines!=0 && !((str.substring(2,str.length())).equals(deli)))
+            else if(lines!=0 && !(str.startsWith("//")))
             {
              newNumbers=reader.readLine()+"/";
            
