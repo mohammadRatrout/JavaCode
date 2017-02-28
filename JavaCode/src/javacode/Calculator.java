@@ -22,7 +22,7 @@ public class Calculator {
     String newNumbers="";
     String []Lines;
     int num=0;
-    int nigNum[]=new int [10];
+    int nigNum[]={0,0,0,0,0,0,0,0,0,0};
     int Max=1000;
     public int Add(String number)
     {
@@ -79,7 +79,7 @@ public class Calculator {
                 {
                     for(int k=0;k<nigNum.length;k++)
                     {
-                        if(nigNum[k]!=0)
+                        if(nigNum[k]<0)
                         System.err.println("You've entered "+nigNum[k]+" and negative numbers are not allowed");
                         
                     }
