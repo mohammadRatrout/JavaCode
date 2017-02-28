@@ -93,7 +93,7 @@ public class Calculator {
                  }
             numbers=numbers+newNumbers; 
             lines++;
-             JOptionPane.showMessageDialog(null, newNumbers);
+            // JOptionPane.showMessageDialog(null, newNumbers);
             }
             
             else if(lines==0 && (str.startsWith("//")))
