@@ -101,18 +101,84 @@ public class Calculator {
     {
         
         String str="";
-        String deli="";
+        String delimeter="";
+        String D[];
+        int count=0;
+        int lines=0;
         //boolean flag=false;
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try{
         str=reader.readLine();
-        if(str.startsWith("//"))
+        if(str.startsWith("//["))
         {
-            deli=str.substring(2,str.length());
+            D=findDeli(str);
+       while(count!=1)
+        {
+            if (lines==0 && !(str.startsWith("//[")) )
+            {
+                
+                newNumbers+=str+"/";
+               
+                if(newNumbers.contains(","))
+                 {
+                    count++;
+                 }
+            numbers=numbers+newNumbers; 
+            lines++;
+            
+            }
+            
+            else if(lines==0 && ((str.contains(D[0]))||(str.contains(D[1]))))
+            {
+            newNumbers=reader.readLine()+"/";
+            if(!(newNumbers.contains(D[0])||newNumbers.contains("/")||newNumbers.contains(D[0])))
+                throw new IOException();
+            newNumbers=newNumbers.replace(D[0], ",");
+            newNumbers=newNumbers.replace(D[1], ",");
+            if(newNumbers.contains(","))
+            {
+               count++;
+            }
+            numbers=numbers+newNumbers; 
+            lines++;
+            }
+            else if(lines!=0 && ((str.contains(D[0]))||(str.contains(D[1]))))
+            {
+             newNumbers=reader.readLine()+"/";
+             if(!(newNumbers.contains(D[0])||newNumbers.contains("/")||newNumbers.contains(D[0])))
+                throw new IOException();
+            newNumbers=newNumbers.replace(D[0], ",");
+            newNumbers=newNumbers.replace(D[1], ",");
+            if(newNumbers.contains(","))
+            {
+               count++;
+            }
+            numbers=numbers+newNumbers; 
+            lines++;
+            }
+            else if(lines!=0 && !(str.startsWith("//[")))
+            {
+             newNumbers=reader.readLine()+"/";
+           
+            if(newNumbers.contains(","))
+            {
+               count++;
+            }
+            numbers=numbers+newNumbers; 
+            lines++;
+            }
+        }
+       
+        
+        numbers=numbers.substring(0,numbers.length()-1);
+       return numbers;
+        }
+        else if(str.startsWith("//"))
+        {
+            delimeter=str.substring(2,str.length());
         }
               
-        int count=0;
-        int lines=0;
+        
         while(count!=1)
         {
             if (lines==0 && !(str.startsWith("//")) )
@@ -129,12 +195,12 @@ public class Calculator {
             
             }
             
-            else if(lines==0 && (str.substring(2,str.length())).equals(deli))
+            else if(lines==0 && (str.substring(2,str.length())).equals(delimeter))
             {
             newNumbers=reader.readLine()+"/";
-            if(!(newNumbers.contains(deli)||newNumbers.contains("/")))
+            if(!(newNumbers.contains(delimeter)||newNumbers.contains("/")))
                 throw new IOException();
-            newNumbers=newNumbers.replace(deli, ",");
+            newNumbers=newNumbers.replace(delimeter, ",");
             if(newNumbers.contains(","))
             {
                count++;
@@ -142,12 +208,12 @@ public class Calculator {
             numbers=numbers+newNumbers; 
             lines++;
             }
-            else if(lines!=0 && (str.contains(deli)))
+            else if(lines!=0 && (str.contains(delimeter)))
             {
              newNumbers=reader.readLine()+"/";
-             if(!(newNumbers.contains(deli)||newNumbers.contains("/")))
+             if(!(newNumbers.contains(delimeter)||newNumbers.contains("/")))
                 throw new IOException();
-            newNumbers=newNumbers.replace(deli,",");
+            newNumbers=newNumbers.replace(delimeter,",");
             if(newNumbers.contains(","))
             {
                count++;
@@ -172,8 +238,31 @@ public class Calculator {
             System.err.println("Wrong delimiter");
             return"0,*";
         }
+        
         numbers=numbers.substring(0,numbers.length()-1);
        return numbers;
         
+    }
+    public String[] findDeli(String line)
+    {
+        String deli1;
+        String deli2;
+        String deli[]=new String[2];
+        int base;
+        int next;
+        int difr; 
+        
+        next=line.indexOf("]");
+        deli1=line.substring(3, next);
+        difr=next-2+1; 
+        base=next+1;
+        deli2=line.substring(base+1,next+difr);
+        deli[0]=deli1;
+        deli[1]=deli2;
+        
+            
+        
+        
+        return deli;
     }
 }
